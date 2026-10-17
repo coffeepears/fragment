@@ -1,0 +1,12 @@
+# 把项目自带的纯 Python 依赖（vendor/pypinyin、vendor/jieba）也装进
+# site-packages。
+#
+# 源码树里 `ninja install` 保持 true（自包含、不依赖系统包）；
+# 打成 .deb 时用 -Dvendored_deps=false，改成依赖 Debian 的
+# python3-pypinyin / python3-jieba，避免同一份代码装两处。
+option(
+  'vendored_deps',
+  type: 'boolean',
+  value: true,
+  description: 'Install the bundled pypinyin/jieba copies into site-packages',
+)

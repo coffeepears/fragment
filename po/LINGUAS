@@ -1,0 +1,4 @@
+# 目前界面文案直接写在代码里（中文为主）。
+# 要加翻译时，把 .py 文件路径填到 POTFILES.in，然后：
+#   meson setup build && ninja -C build gnome-poster-pot
+#   msginit -i build/gnome-poster.pot -o po/zh_CN.po -l zh_CN

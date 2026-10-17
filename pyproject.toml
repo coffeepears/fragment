@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gnome-poster"
+version = "0.4.5"
+description = "现代 GNOME 桌面发帖客户端：一次撰写，分发到小红书与 X"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "GPL-3.0-or-later" }
+authors = [{ name = "pear" }]
+keywords = ["gnome", "gtk4", "libadwaita", "xiaohongshu", "twitter", "x"]
+
+# PyGObject / GTK4 / Libadwaita 走系统包（Debian: python3-gi gir1.2-gtk-4.0 gir1.2-adw-1）
+# 这里只声明纯 Python 依赖。
+dependencies = [
+    "httpx>=0.27",
+    "pypinyin>=0.51",   # @ 提及的拼音模糊搜索；缺失时自动降级
+]
+
+[project.optional-dependencies]
+# 更聪明的本地关键词/标签抽取（体量较大，可选）
+smart = ["jieba>=0.42"]
+# 视频封面抽帧（其实走系统 GStreamer，这里只是文档说明）
+video = []
+
+[project.scripts]
+gnome-poster = "gnome_poster.main:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,14 @@
+{
+  "_comment": "关注列表示例。复制到 ~/.config/gnome-poster/contacts.json 即可在 @ 弹窗里看到候选；X 登录后可用『同步关注列表』自动拉取。",
+  "contacts": [
+    { "name": "小红薯官方", "handle": "xiaohongshu", "platform": "xhs", "id": "xhs-0001" },
+    { "name": "林深见鹿", "handle": "linshen", "platform": "xhs", "id": "xhs-0002" },
+    { "name": "阿岚", "handle": "alan_", "platform": "xhs", "id": "xhs-0003" },
+    { "name": "陈默", "handle": "chenmo", "platform": "xhs", "id": "xhs-0004" },
+    { "name": "GNOME", "handle": "GNOME", "platform": "x", "id": "x-0001" },
+    { "name": "Libadwaita", "handle": "libadwaita", "platform": "x", "id": "x-0002" },
+    { "name": "张三", "handle": "zhangsan", "platform": "x", "id": "x-0003" },
+    { "name": "Lina", "handle": "lina_dev", "platform": "x", "id": "x-0004" },
+    { "name": "王大锤", "handle": "wangdachui", "platform": "x", "id": "x-0005" }
+  ]
+}

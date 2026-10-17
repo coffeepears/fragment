@@ -1,0 +1,12 @@
+src/gnome_poster/application.py
+src/gnome_poster/window.py
+src/gnome_poster/models.py
+src/gnome_poster/widgets/composer.py
+src/gnome_poster/widgets/mention_popover.py
+src/gnome_poster/widgets/media_grid.py
+src/gnome_poster/widgets/tag_flow.py
+src/gnome_poster/widgets/poll_panel.py
+src/gnome_poster/widgets/platform_row.py
+src/gnome_poster/widgets/settings_dialog.py
+data/com.pear.GnomePoster.desktop.in
+data/com.pear.GnomePoster.metainfo.xml

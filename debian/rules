@@ -1,0 +1,107 @@
+#!/usr/bin/make -f
+#
+# 手写的 debian/rules。
+#
+# 为什么不用 debhelper：这台机器上没装 debhelper，而装它要 sudo。
+# 本文件只依赖 dpkg-dev + meson + ninja，所以 `dpkg-buildpackage -b -uc -us`
+# 在干净环境里也能直接出包。
+#
+# 想换成标准的 debhelper 流程：
+#   1) debian/control 的 Build-Depends 加 `debhelper-compat (= 13)`
+#   2) 本文件整体换成：
+#          #!/usr/bin/make -f
+#          %:
+#                  dh $@ --buildsystem=meson
+#   3) Depends 里可以换回 ${misc:Depends} / ${python3:Depends}
+#
+# 打包时用 -Dvendored_deps=false：自带的 pypinyin / jieba 副本不打进 deb，
+# 改成依赖 python3-pypinyin / python3-jieba（见 debian/control）。
+#
+include /usr/share/dpkg/default.mk
+
+PKG      := gnome-poster
+BUILDDIR := $(CURDIR)/debian/build
+STAGEDIR := $(CURDIR)/debian/stage
+PKGDIR   := $(CURDIR)/debian/$(PKG)
+DOCDIR   := $(PKGDIR)/usr/share/doc/$(PKG)
+# 架构必须是真实的：包里带了 amd64 的静态二进制（内置发布服务），
+# 写死 _all 会导致包名和 control 里的 Architecture 对不上。
+DEB      := $(PKG)_$(DEB_VERSION_UPSTREAM_REVISION)_$(DEB_HOST_ARCH).deb
+
+# 别往源码树里写 __pycache__
+export PYTHONDONTWRITEBYTECODE = 1
+
+%:
+	@echo "debian/rules: 未知目标 '$@'" >&2
+	@exit 2
+
+clean:
+	rm -rf $(BUILDDIR) $(STAGEDIR) $(PKGDIR)
+	rm -f debian/files debian/*.substvars
+	find . -path ./vendor -prune -o -name '__pycache__' -type d -print0 2>/dev/null | \
+		xargs -0 -r rm -rf
+
+build:
+	@if [ ! -f $(BUILDDIR)/build.ninja ]; then \
+		meson setup $(BUILDDIR) $(CURDIR) \
+			--prefix=/usr \
+			--buildtype=plain \
+			--wrap-mode=nodownload \
+			-Dvendored_deps=false; \
+	fi
+	ninja -C $(BUILDDIR)
+
+# 包是 Architecture: amd64（带了内置的 amd64 二进制），所以标准目标名是
+# binary-arch。dpkg-buildpackage 对 arch 相关的包只会调 binary-arch；
+# 原来这里叫 binary-indep，靠 %: 兜底会直接以「未知目标」退出构建。
+binary-arch: build
+	rm -rf $(STAGEDIR) $(PKGDIR)
+	DESTDIR=$(STAGEDIR) ninja -C $(BUILDDIR) install
+
+	mkdir -p $(PKGDIR)/DEBIAN
+	cp -a $(STAGEDIR)/usr $(PKGDIR)/usr
+
+	# 字节码交给 postinst 里的 py3compile 生成，包里不带 .pyc
+	find $(PKGDIR) -name '*.pyc' -delete
+	find $(PKGDIR) -name '__pycache__' -type d -prune -exec rm -rf {} +
+
+	# 文档：copyright 是 Debian 的硬性要求
+	mkdir -p $(DOCDIR)
+	cp debian/copyright $(DOCDIR)/copyright
+	gzip -9n -c debian/changelog > $(DOCDIR)/changelog.Debian.gz
+	gzip -9n -c README.md      > $(DOCDIR)/README.md.gz
+
+	# 权限：目录 755、文件 644，再修回该可执行的
+	find $(PKGDIR) -type d -exec chmod 755 {} +
+	find $(PKGDIR) -type f -exec chmod 644 {} +
+	chmod 755 $(PKGDIR)/usr/bin/$(PKG)
+	# 内置的发布服务是二进制，必须可执行 —— 上面那轮 `chmod 644` 会把它拍成
+	# 不可执行，装完就是「Permission denied」，而且报错完全看不出是这个原因。
+	if [ -f "$(PKGDIR)/usr/libexec/gnome-poster/xiaohongshu-mcp" ]; then \
+		chmod 755 $(PKGDIR)/usr/libexec/gnome-poster/xiaohongshu-mcp; \
+	fi
+	for script in postinst postrm; do \
+		if [ -f debian/$(PKG).$$script ]; then \
+			install -m 755 debian/$(PKG).$$script $(PKGDIR)/DEBIAN/$$script; \
+		fi; \
+	done
+
+	# control（dpkg-gencontrol 会顺带算好 Installed-Size）
+	[ -f debian/$(PKG).substvars ] || : > debian/$(PKG).substvars
+	dpkg-gencontrol -p$(PKG) -P$(PKGDIR) -Tdebian/$(PKG).substvars
+
+	# md5sums 用包内相对路径
+	cd $(PKGDIR) && find usr -type f | LC_ALL=C sort | xargs md5sum > DEBIAN/md5sums
+	chmod 644 $(PKGDIR)/DEBIAN/control $(PKGDIR)/DEBIAN/md5sums
+
+	# --root-owner-group：不用 fakeroot 也能打成 root:root
+	dpkg-deb --build --root-owner-group $(PKGDIR) $(CURDIR)/../$(DEB)
+	echo "$(DEB) net optional" > debian/files
+
+binary: binary-arch
+
+# native 包没有上游 tarball
+get-orig-source:
+	@echo "$(PKG) 是 3.0 (native) 包，没有 orig tarball"
+
+.PHONY: clean build binary binary-arch binary-indep get-orig-source

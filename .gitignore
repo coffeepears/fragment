@@ -1,0 +1,23 @@
+# 构建产物
+debian/build/
+debian/stage/
+debian/gnome-poster/
+debian/files
+debian/*.substvars
+*.deb
+*.buildinfo
+*.changes
+__pycache__/
+*.pyc
+
+# 自带的纯 Python 依赖：体积大（27MB）且 apt 里有，不入库
+# 需要它们时：sudo apt install python3-pypinyin python3-jieba
+vendor/pypinyin/
+vendor/jieba/
+
+# 自检产物
+screenshots/settings-tree.txt
+
+# 系统垃圾
+.DS_Store
+screenshots/widget-tree-*.txt

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.pear.GnomePoster</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <name>Fragment</name>
+  <summary>一次撰写，发布到小红书</summary>
+
+  <developer id="com.pear">
+    <name>pear</name>
+  </developer>
+
+  <description>
+    <p>
+      Fragment 是一个原生 GNOME 的 Rednote 笔记客户端。支持标题、正文、
+      图片、话题与投票，扫码登录后直接发布。
+    </p>
+    <p>功能：</p>
+    <ul>
+      <li>标题、正文、图片 / 视频拖拽上传与缩略图预览</li>
+      <li>输入 @ 实时弹出关注列表，支持拼音与昵称模糊搜索</li>
+      <li>根据正文推荐的话题标签，点击即成 chips</li>
+      <li>可插入投票（Rednote 原生支持；通道不支持时降级为正文文字）</li>
+      <li>配套本机发布服务：手机扫码登录，签名与验证码都交给它</li>
+      <li>拿不准就先走「仅自己可见」，确认效果再公开</li>
+      <li>跟随系统深色 / 浅色模式，也可在设置里强制切换</li>
+    </ul>
+  </description>
+
+  <launchable type="desktop-id">com.pear.GnomePoster.desktop</launchable>
+
+  <screenshots>
+    <screenshot type="default">
+      <caption>撰写与分发界面</caption>
+      <image>https://example.org/gnome-poster/screenshot.png</image>
+    </screenshot>
+  </screenshots>
+
+  <url type="homepage">https://example.org/gnome-poster</url>
+  <url type="bugtracker">https://example.org/gnome-poster/issues</url>
+
+  <content_rating type="oars-1.1"/>
+
+  <releases>
+    <release version="0.1.0" date="2026-10-15">
+      <description>
+        <p>首个版本：撰写界面、@ 提及补全、智能标签、投票面板、多平台分发骨架。</p>
+      </description>
+    </release>
+  </releases>
+
+  <requires>
+    <display_length compare="ge">360</display_length>
+  </requires>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
+</component>

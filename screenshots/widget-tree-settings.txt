@@ -1,0 +1,385 @@
+AdwDialogHost
+  Bin
+    BreakpointBin
+      ToastOverlay
+        ToolbarView
+          ScrolledWindow
+            Viewport
+              Clamp
+                Box
+                  Box
+                    Box
+                      Label '标题（小红书）'
+                      Box
+                        Entry 'GTK4 写一个多平台发帖器'
+                          Text 'GTK4 写一个多平台发帖器'
+                            Label '只有小红书用标题，最多 20 字'
+                        Label '14/20'
+                  MediaGrid
+                    Box
+                      Label '图片 / 视频'
+                      Label '2 / 18'
+                      Button
+                        Box
+                          Image
+                          Label '添加'
+                      MenuButton
+                        ToggleButton
+                          Box
+                            Image
+                            GtkBuiltinIcon
+                        PopoverMenu
+                          GtkPopoverContent
+                            ScrolledWindow
+                              Viewport
+                                Stack
+                                  GtkMenuSectionBox
+                                    Box
+                                      GtkModelButton
+                                        Box
+                                        Label '从文件选择…'
+                                      GtkModelButton
+                                        Box
+                                        Label '清空全部'
+                              Scrollbar
+                                Range
+                                  GtkGizmo
+                                    GtkGizmo
+                              Scrollbar
+                                Range
+                                  GtkGizmo
+                                    GtkGizmo
+                    Stack
+                      Label '把图片或视频拖到这里，或点右上角「添加」\n小红书至少 1 张图，'
+                      GridView
+                        GtkListItemWidget
+                          _MediaTile
+                            Box
+                              Stack
+                                Image
+                                Picture
+                            Box
+                              Label '图片'
+                            Button
+                              Image
+                            Box
+                              Button
+                                Label 'ALT'
+                        GtkListItemWidget
+                          _MediaTile
+                            Box
+                              Stack
+                                Image
+                                Picture
+                            Box
+                              Label '图片'
+                            Button
+                              Image
+                            Box
+                              Button
+                                Label 'ALT'
+                  Box
+                    Box
+                      Label '正文'
+                      Label '小红书 314/1000 · X 215/280 · Insta'
+                    Composer
+                      Overlay
+                        ScrolledWindow
+                          TextView
+                          Scrollbar
+                            Range
+                              GtkGizmo
+                                GtkGizmo
+                          Scrollbar
+                            Range
+                              GtkGizmo
+                                GtkGizmo
+                        Label '分享点什么…（输入 @ 提及好友，Ctrl+Enter 发布）'
+                  TagFlow
+                    Box
+                      Label '智能话题'
+                      Label '14 个候选'
+                      Spinner
+                      Entry
+                        Text
+                          Label '手动加话题…'
+                      Button
+                        Image
+                    FlowBox
+                      FlowBoxChild
+                        _TagChip
+                          Box
+                            Label '#GNOME'
+                      FlowBoxChild
+                        _TagChip
+                          Box
+                            Label '#GTK4'
+                      FlowBoxChild
+                        _TagChip
+                          Box
+                            Label '#桌面开发'
+                      FlowBoxChild
+                        _TagChip
+                          Box
+                            Label '#Libadwaita'
+                      FlowBoxChild
+                        _TagChip
+                          Box
+                            Label '#HIG'
+                      FlowBoxChild
+                        _TagChip
+                          Box
+                            Label '#首字母'
+                      FlowBoxChild
+                        _TagChip
+                          Box
+                            Label '#桌面'
+                      FlowBoxChild
+                        _TagChip
+                          Box
+                            Label '#细节'
+                      FlowBoxChild
+                        _TagChip
+                          Box
+                            Label '#正文'
+                      FlowBoxChild
+                        _TagChip
+                          Box
+                            Label '#好友'
+                      FlowBoxChild
+                        _TagChip
+                          Box
+                            Label '#列表'
+                      FlowBoxChild
+                        _TagChip
+                          Box
+                            Label '#拼音'
+                      FlowBoxChild
+                        _TagChip
+                          Box
+                            Label '#话题'
+                      FlowBoxChild
+                        _TagChip
+                          Box
+                            Label '#林深'
+                      FlowBoxChild
+                        _TagChip
+                          Box
+                            Label '#Python'
+                    Label '写点内容，这里会自动冒出合适的话题标签；也可以手动加。'
+                  Box
+                    ToggleButton
+                      Box
+                        Image
+                        Label '插入投票'
+                    PollPanel
+                      Box
+                        Box
+                          Label '投票'
+                          Label '小红书 2–6 项 · X 2–4 项 · 问题 ≤20 字'
+                        Box
+                          Label '问题'
+                          Entry
+                            Text
+                              Label '想让别人选什么？（建议 ≤15 字）'
+                          Label '0/20'
+                        Box
+                          _OptionRow
+                            Label '1'
+                            Entry '自己写'
+                              Text '自己写'
+                                Label '选项 1'
+                            Label '3/25'
+                            Button
+                              Image
+                          _OptionRow
+                            Label '2'
+                            Entry '用现成的'
+                              Text '用现成的'
+                                Label '选项 2'
+                            Label '4/25'
+                            Button
+                              Image
+                          _OptionRow
+                            Label '3'
+                            Entry '再想想'
+                              Text '再想想'
+                                Label '选项 3'
+                            Label '3/25'
+                            Button
+                              Image
+                        Button
+                          Box
+                            Image
+                            Label '添加选项'
+                        Box
+                          Label '持续'
+                          DropDown
+                            ToggleButton
+                              Box
+                                Stack
+                                  Label '（无）'
+                                  GtkListItemWidget
+                                    Box
+                                      Label '1 天'
+                                      Image
+                                GtkBuiltinIcon
+                            Popover
+                              GtkPopoverContent
+                                Box
+                                  Box
+                                    SearchEntry
+                                      Image
+                                      Text
+                                        Label '搜索…'
+                                      Image
+                                  ScrolledWindow
+                                    ListView
+                                      GtkListItemWidget
+                                        Box
+                                          Label '1 小时'
+                                          Image
+                                      GtkListItemWidget
+                                        Box
+                                          Label '6 小时'
+                                          Image
+                                      GtkListItemWidget
+                                        Box
+                                          Label '1 天'
+                                          Image
+                                      GtkListItemWidget
+                                        Box
+                                          Label '3 天'
+                                          Image
+                                      GtkListItemWidget
+                                        Box
+                                          Label '7 天（最长）'
+                                          Image
+                                    Scrollbar
+                                      Range
+                                        GtkGizmo
+                                          GtkGizmo
+                                    Scrollbar
+                                      Range
+                                        GtkGizmo
+                                          GtkGizmo
+                        Label '3/6 项已填'
+            Scrollbar
+              Range
+                GtkGizmo
+                  GtkGizmo
+            Scrollbar
+              Range
+                GtkGizmo
+                  GtkGizmo
+          Revealer
+            WindowHandle
+              Box
+                HeaderBar
+                  WindowHandle
+                    CenterBox
+                      AdwGizmo
+                        Box
+                          WindowControls
+                            Button
+                              Image
+                            Button
+                              Image
+                            Button
+                              Image
+                          AdwBackButton
+                            Button
+                              Image
+                      Bin
+                        WindowTitle '新帖子'
+                          Box
+                            Label '新帖子'
+                            Label '发布到 小红书 + X · 2 个附件'
+                      AdwGizmo
+                        Box
+                          Button
+                            Box
+                              Image
+                              Label '复制文案'
+                          MenuButton
+                            ToggleButton
+                              Box
+                                Image
+                                GtkBuiltinIcon
+                            PopoverMenu
+                              GtkPopoverContent
+                                ScrolledWindow
+                                  Viewport
+                                    Stack
+                                      GtkMenuSectionBox
+                                        Box
+                                          GtkModelButton
+                                            Box
+                                            Label '设置'
+                                            Label 'Ctrl+,'
+                                          GtkModelButton
+                                            Box
+                                            Label '复制文案（不发布）'
+                                            Label 'Shift+Ctrl+C'
+                                          GtkModelButton
+                                            Box
+                                            Label '存草稿'
+                                          GtkModelButton
+                                            Box
+                                            Label '恢复上次草稿'
+                                          GtkModelButton
+                                            Box
+                                            Label '清空全部'
+                                            Label 'Shift+Ctrl+Delete'
+                                  Scrollbar
+                                    Range
+                                      GtkGizmo
+                                        GtkGizmo
+                                  Scrollbar
+                                    Range
+                                      GtkGizmo
+                                        GtkGizmo
+                          Spinner
+                          Button
+                            Label '发布'
+                          WindowControls
+                Banner '还没配置任何平台 —— 可以先开「演练模式」走一遍，或者用右上角'
+                  Revealer
+                    AdwGizmo
+                      Label '还没配置任何平台 —— 可以先开「演练模式」走一遍，或者用右上角'
+                      Button
+                        Label '打开设置'
+          Revealer
+            WindowHandle
+              Box
+                Box
+                  Box
+                    PlatformRow
+                      FlowBoxChild
+                        PlatformToggle
+                          Box
+                            CheckButton
+                              GtkBuiltinIcon
+                              Label '小红书'
+                            UsageRing
+                          Label '标题 14/20 · 正文 314/1000 · 媒体 2/18'
+                      FlowBoxChild
+                        PlatformToggle
+                          Box
+                            CheckButton
+                              GtkBuiltinIcon
+                              Label 'X'
+                            UsageRing
+                          Label '正文 215/280 · 媒体 2/4 · 投票'
+                      FlowBoxChild
+                        PlatformToggle
+                          Box
+                            CheckButton
+                              GtkBuiltinIcon
+                              Label 'Instagram'
+                            UsageRing
+                          Label '未勾选'
+                    ProgressBar
+                      GtkGizmo
+                        GtkGizmo
+                  Label '演练模式：内容不会真的发出去'

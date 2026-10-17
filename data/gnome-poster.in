@@ -1,0 +1,3 @@
+#!/bin/sh
+# 由 meson 生成并安装到 ${bindir}。源码树里跑请用 ./run.sh。
+exec "@PYTHON@" -m gnome_poster.main "$@"

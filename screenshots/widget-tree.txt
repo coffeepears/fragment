@@ -1,0 +1,80 @@
+AdwDialogHost
+  Bin
+    BreakpointBin
+      ToastOverlay
+        ToolbarView
+          ScrolledWindow
+            Viewport
+              Clamp
+                Box
+                  Box
+                    Box
+                      Label '标题（小红书）'
+                      Box
+                        Entry 'GTK4 写一个多平台发帖器'
+                          Text 'GTK4 写一个多平台发帖器'
+                            Label '只有小红书用标题，最多 20 字'
+                        Label '14/20'
+                  MediaGrid
+                    Box
+                      Label '图片 / 视频'
+                      Label '2 / 18'
+                      Button
+                        Box
+                          Image
+                          Label '添加'
+                      MenuButton
+                        ToggleButton
+                          Box
+                            Image
+                            GtkBuiltinIcon
+                        PopoverMenu
+                          GtkPopoverContent
+                            ScrolledWindow
+                              Viewport
+                                Stack
+                                  GtkMenuSectionBox
+                                    Box
+                                      GtkModelButton
+                                        Box
+                                        Label '从文件选择…'
+                                      GtkModelButton
+                                        Box
+                                        Label '清空全部'
+                              Scrollbar
+                                Range
+                                  GtkGizmo
+                                    GtkGizmo
+                              Scrollbar
+                                Range
+                                  GtkGizmo
+                                    GtkGizmo
+                    Stack
+                      Label '把图片或视频拖到这里，或点右上角「添加」\n小红书'
+                      GridView
+                        GtkListItemWidget
+                          _MediaTile
+                            Box
+                              Stack
+                                Image
+                                Picture
+                            Box
+                              Label '图片'
+                            Button
+                              Image
+                            Box
+                              Button
+                                Label 'ALT'
+                        GtkListItemWidget
+                          _MediaTile
+                            Box
+                              Stack
+                                Image
+                                Picture
+                            Box
+                              Label '图片'
+                            Button
+                              Image
+                            Box
+                              Button
+                                Label 'ALT'

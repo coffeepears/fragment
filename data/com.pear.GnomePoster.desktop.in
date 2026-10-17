@@ -1,0 +1,15 @@
+[Desktop Entry]
+Name=Fragment
+GenericName=Rednote 发帖
+Comment=撰写并发布 Rednote 笔记
+Comment[en]=Compose and publish Rednote notes
+Exec=gnome-poster
+Icon=com.pear.GnomePoster
+Terminal=false
+Type=Application
+Categories=GTK;Network;InstantMessaging;
+Keywords=post;publish;share;rednote;xiaohongshu;笔记;fragment;
+StartupNotify=true
+StartupWMClass=com.pear.GnomePoster
+# 需要联网发布
+X-GNOME-UsesNotifications=true

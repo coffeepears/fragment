@@ -1,0 +1,305 @@
+gnome-poster (0.4.5) trixie; urgency=medium
+
+  * 应用图标换成 Papirus 原生 notepad（文档 + 红笔）。取自
+    Papirus/128x128/apps/notepad.svg（浅色变体；深色主题下仍然清晰）。
+    换回小红书红笔记卡：把 data/icons/hicolor/scalable/apps/
+    com.pear.GnomePoster.svg 换回即可。
+
+ -- pear <pear@localhost>  Sat, 17 Oct 2026 19:20:00 +0800
+
+gnome-poster (0.4.4) trixie; urgency=medium
+
+  * 「关于」对话框里的描述去掉括号补充，只留「一次撰写，发布到Rednote。」。
+    那句话本身已经过时：没有「行为」分页了，X / Instagram 开关也已从
+    高级设置里删掉。应用菜单里的「关于」同步处理。
+
+ -- pear <pear@localhost>  Sat, 17 Oct 2026 19:00:00 +0800
+
+gnome-poster (0.4.3) trixie; urgency=medium
+
+  * 应用名统一为 **Fragment**：清掉文档、工具、包描述里残留的「发帖器」。
+    desktop / metainfo 里的 Name 早已是 Fragment，这次把 GenericName、
+    Comment 与 metainfo 描述一并改成 Rednote 口径。
+  * 桌面条目与包描述里的「小红书」改为 **Rednote**（与界面一致）。
+
+ -- pear <pear@localhost>  Sat, 17 Oct 2026 18:40:00 +0800
+
+gnome-poster (0.4.2) trixie; urgency=medium
+
+  * 界面里的「小红书」全部改为 **Rednote**（即「登录Rednote」）。
+  * 高级设置里删掉「显示 X 和 Instagram」开关。
+  * 修正标题 / 正文两个用量圆环不对齐的问题：两处计数标签统一宽度，
+    圆环落在同一条竖线上。
+  * 智能话题：可加一句固定说明「写点内容，这里会自动冒出合适的话题标签；
+    也可以手动加。」；空正文时「先写点正文吧」是常驻提示，
+    **按刷新键不再做任何反应**（原来是按了才冒出提示，看着像没响应又突然说话）。
+
+ -- pear <pear@localhost>  Sat, 17 Oct 2026 18:10:00 +0800
+
+gnome-poster (0.4.1) trixie; urgency=medium
+
+  * 界面严格对齐参考稿：
+      - 用量圆环与字数移到「标题」「正文」的**标签行**右侧（原来在输入框旁）
+      - 媒体空态文案改为「拖入图片或视频，或轻点“添加”」
+      - 正文占位改为「@提及好友，Ctrl+Enter 发布」
+      - 「扫码登录」改为「扫描二维码」，「测试连接」改为「测试…」
+      - ⋮ 菜单精简为「恢复上次草稿」「首选项」两项
+  * 设置对话框由四个分页改为**单页**「首选项」：
+      登录小红书 / 主题 / 发布 / 关于Fragment
+    「高级设置…」折叠区里收纳换通道、改端口、Cookie、演练模式、
+    显示 X 与 Instagram、关注列表同步。
+    文案统一为陈述句（颜色方案、自动推荐话题、退出时保存草稿）。
+  * 冒烟测试随新结构更新，86 项通过。
+
+ -- pear <pear@localhost>  Sat, 17 Oct 2026 17:30:00 +0800
+
+gnome-poster (0.4.0) trixie; urgency=medium
+
+  * 重命名为 **Fragment**（窗口标题、启动器、关于页、metainfo、包描述）。
+    内部包名 / App ID / 设置路径仍为 gnome-poster 以保持兼容。
+  * 界面按新的版式重排：
+      - 标题：细标签在上，输入框 + 用量圆环 + 字数在一行
+      - 媒体：标题改为「媒体」，计数改为 `2/18`
+      - 正文：标题行右对齐一组圆环 + 字数，多平台明细收进 tooltip
+      - 话题：去掉「N 个候选」，输入框占位改为「添加话题…」
+      - 投票：去掉图标，纯文字按钮
+      - 头部：「复制文案」收进 ⋮ 菜单，头部只剩 ⋮ 与「发布」
+      - 只有一个平台时隐藏底部平台开关，底部条改为「有内容才占位」
+      - 单平台时不再显示「发布到 小红书 · N 个附件」副标题
+  * 设置页精简：去掉整个「先看这里」分组与编号步骤，账号页只剩
+    「小红书 / 关注列表」；文案改为陈述句，与 GNOME 自带应用一致。
+  * 图标：颜色加深（#ff2442 → #d41e36 渐变到 #bd1529），并加了一层很淡的
+    上下明暗，接近 Papirus 的立体语汇。
+  * 修两处偶发失败的测试（缩略图解码；正文计数器断言随新排版更新）。
+  * 冒烟测试 86 项。
+
+ -- pear <pear@localhost>  Sat, 17 Oct 2026 17:00:00 +0800
+
+gnome-poster (0.3.0) trixie; urgency=medium
+
+  * 【体验】把小红书发布服务**打进 deb**，装应用就连后端一起装好。
+    原来它被当成「可选的第三方依赖」：用户装完 app 还要自己去 GitHub 下载
+    二进制、手写 systemd 单元、systemctl enable —— 对只想发小红书的人来说
+    纯属白折腾。现在：
+      - 服务二进制随包安装到 /usr/libexec/gnome-poster/（附 Apache-2.0 许可）
+      - app 负责拉起它：已在跑就直接用；否则先试 systemctl --user start；
+        再不行自己 spawn，退出时只收掉自己起的那个（不动用户自己的服务）
+      - 顶部横幅显示启动进度；首次启动要下浏览器会明确告知
+      - 设置页文案改成「随应用一起安装，不需要你另外装任何东西」
+  * 打包随之一并修正：
+      - Architecture: all → **amd64**（包里有 amd64 静态二进制）
+      - debian/rules 的 binary-indep → **binary-arch**（否则 dpkg-buildpackage
+        会撞上 %: 兜底以「未知目标」退出）
+      - 包名后缀 _all → 真实架构
+      - 给内置二进制补 chmod 755（原来那轮全量 chmod 644 会把服务拍成
+        不可执行，装完就是 Permission denied）
+  * 冒烟测试 78 → 84 项：服务二进制随包、端口解析、工作目录稳定性、
+    设置页「不用另装东西」的文案。
+
+ -- pear <pear@localhost>  Sat, 17 Oct 2026 01:15:00 +0800
+
+gnome-poster (0.2.1) trixie; urgency=medium
+
+  * 换应用图标：蓝色渐变的纸飞机（Adwaita 风格）→ **小红书红扁平笔记卡**
+    （Papirus 风格）。原来那个是渐变圆角方块，跟 Papirus-Dark 主题的扁平语言
+    放一起很突兀。新图标用小红书品牌红 #FF2442 + 白色笔记卡，
+    「发小书」本来就是发笔记，题材也贴。
+    symbolic 版本一并换成配套的单色笔记卡。
+  * 修一个偶发失败的冒烟测试：「圆环能渲染成图」在主循环忙的时候会在控件
+    还没被分配尺寸的那一刻快照，只能失败。改成排一次重试（最多 4 次），
+    重试仍失败才算真失败。**偶发测试比没有测试更糟** —— 它会让正常的改动
+    看起来像坏了，今晚就白白折腾了一轮。
+  * 用户可见的描述文案改成「发布到小红书」为主动作，X / Instagram 作为
+    可选的附加能力（它们在 行为 页默认隐藏）。
+    涉及 desktop 文件、关于对话框、模块 docstring、deb 包描述、metainfo。
+
+ -- pear <pear@localhost>  Sat, 17 Oct 2026 00:45:00 +0800
+
+gnome-poster (0.2.0) trixie; urgency=medium
+
+  * 「只发小红书」模式补完（看截图才发现漏的）：
+    - 正文计数器原来还写着「X 215/280 · Instagram 263/2200」，
+      会让人以为还能发过去；现在只算界面上真正有的平台。
+    - 顶部横幅在后台探测**还没回来**之前就喊「还没配置任何平台」，
+      用户明明配好了却先被冤枉一下（画面还会闪一下假横幅）。
+      现在未知状态下先不显示，等真结果出来再说。
+    - extra-platforms 变化时刷新计数器与横幅。
+  * 冒烟测试 76 → 78 项（正文计数器只算小红书、不冤枉横幅）。
+
+ -- pear <pear@localhost>  Sat, 17 Oct 2026 01:40:00 +0800
+
+gnome-poster (0.1.9) trixie; urgency=medium
+
+  * 新增「同时显示 X 和 Instagram」开关（行为页）。关掉之后界面只剩小红书：
+    主界面只有一个小红书开关，账号页也只有「先看这里 / 小红书 / 通讯录与关注」。
+    只发小红书的话，X 的「Client ID / 回调地址」和 Instagram 的
+    「访问令牌 / 图床上传命令」都是纯干扰。
+    **代码一行没删**，开关打开就回来。
+  * 关掉时会把已选的 X / Instagram 从发布目标里摘掉，
+    免得留下「看不见但还勾着」的平台导致发布行为诡异。
+  * 账号页分组改为由 account_sections() 决定，真实构建与冒烟测试共用同一个
+    函数（原来测试靠遍历 widget 树，但 Adw.PreferencesDialog 在 present 之前
+    get_first_child() 是 None，遍历不到）。
+  * 冒烟测试 77 → 76 项（合并了设置页遍历相关的检查）。
+
+ -- pear <pear@localhost>  Sat, 17 Oct 2026 01:20:00 +0800
+
+gnome-poster (0.1.8) trixie; urgency=medium
+
+  * 【严重】修 X 媒体上传端点写错（凭记忆写的，实测必失败）。
+    - INIT 原来打 `/2/media/upload`，但那是**另一个**「单请求上传」端点
+      （要求 body 带 `media` 字段），于是收到很误导的 400
+      「Missing media field in JSON」。正确的分段上传端点是
+      `/2/media/upload/initialize`。
+    - 补上图片的单请求上传路径：图片（≤5MB）一次 POST /2/media/upload
+      即可，不必走三段式。视频/大文件才走分段。
+    - 两个端点都是 additionalProperties: false，多塞字段同样 400。
+  * 新增 XClient.delete_tweet()（DELETE /2/tweets/:id，属 tweet.write 权限）。
+  * 新增 tools/x_test_publish.py：发一条测试推文验证链路并**立刻删掉**
+    （X 没有「仅自己可见」，测试推文必须能自己收尾）。
+  * X 发布时对「含链接」的帖子给出成本提醒：X 按量计费里
+    Post: Create 是 $0.015/次，而 Create (with URL) 是 $0.200/次 —— **贵 13 倍**。
+  * 冒烟测试 72 → 77 项：新增媒体端点正确性（图片走单请求、视频走 initialize、
+    initialize 的字段集）与链接识别。
+
+ -- pear <pear@localhost>  Sat, 17 Oct 2026 01:00:00 +0800
+
+gnome-poster (0.1.7) trixie; urgency=medium
+
+  * 【严重】修 OAuth 回调接收器被浏览器「预连接」卡死的问题。
+    HTTPServer 是单线程的，Firefox 对回调端口做的预连接（连上不发数据）
+    会让服务线程永久卡在「读请求行」上，导致**真正的 OAuth 回调在队列里
+    饿死**（浏览器一直转圈 / 无法连接，而端口明明在 LISTEN）。
+    实测这是必现的 —— 也就是说 X 登录在真机上根本不可能成功，
+    之前的测试只跑了隔离环境、没模拟浏览器行为，所以没抓到。
+    改为 ThreadingHTTPServer + 15 秒连接超时 + 回完即断 + daemon 线程。
+  * 【严重】修 SOCKS 代理导致 X / Instagram / 小红书 Web 通道全部不可用。
+    环境里 ALL_PROXY=socks://127.0.0.1:7890 时，httpx 在建客户端阶段就抛
+    「Unknown scheme for proxy URL」—— 它不认 socks:// 这种写法，而且
+    socks5:// 还需要 socksio。新增 base.proxied_client()，从环境变量里挑出
+    httpx 真能用的代理（优先 http(s)），三个客户端统一改用。
+  * 补 XAdapter.check_account()：设置页给 X 也放了「测试连接」，但适配器漏了
+    这个方法，点下去只会退回 account_hint()（纯本地猜），令牌失效也看不出来。
+  * 修设置页「测试连接」把 X 的结果写进 Instagram 状态行的问题（三元表达式漏了 X）。
+  * 修 tools/x_login.py 成功后仍返回退出码 1 的问题（多余的 del GLib）。
+  * 冒烟测试 70 → 72 项：新增「带 2 个空闲预连接仍能收到 code」和
+    「每个平台都实现了 check_account / publish」。
+  * 新增 tools/x_login.py（命令行登录 X）与 tools/xhs_test_publish.py
+    （发一条仅自己可见的测试笔记验证链路）。
+
+ -- pear <pear@localhost>  Sat, 17 Oct 2026 00:30:00 +0800
+
+gnome-poster (0.1.6) trixie; urgency=medium
+
+  * 新增小红书「笔记可见范围」：公开可见 / 仅自己可见 / 仅互关好友可见。
+    服务本来就有这个参数，之前没接上；想先自己看一眼效果时很有用。
+  * 新增 tools/xhs_test_publish.py：发一条「仅自己可见」的测试笔记验证整条
+    发帖链路，默认私密，--public 才公开。
+  * 冒烟测试加硬保险：发布步骤强制 simulate=True 并二次校验，没生效就跳过。
+    背景：早前版本里上一步会临时关掉演练模式，导致测试真的往账号里打了一次
+    发布请求（标题「冒烟测试帖子」），只因为当时未登录才失败。测试永远不该
+    有能力碰真实账号。
+  * 冒烟测试 68 项。
+
+ -- pear <pear@localhost>  Fri, 16 Oct 2026 19:35:00 +0800
+
+gnome-poster (0.1.5) trixie; urgency=medium
+
+  * 二维码**自动续期**：服务的二维码只管 4 分钟，早先版本要用户手点「换一张」，
+    结果「人不在电脑前 → 过期 → 回来扫了个寂寞」。现在按服务返回的有效期
+    自己排续期，二维码始终有效。
+  * 新增 `gnome-poster --xhs-login`：启动后直接把扫码对话框弹出来，
+    省掉「设置 → 账号 → 小红书 → 扫码登录」四步。
+    单实例下也生效（已有进程在跑时会转给它处理）。
+  * 轮询改成自适应：用户大概率在电脑前的前 5 分钟里每 20 秒问一次，
+    之后不再主动打服务 —— 因为**每次查登录状态都会开一个无头浏览器页面**，
+    13 秒一次挂一小时就是几百次页面加载，既浪费又容易被风控盯上。
+    之后只在「续二维码」时顺带拿 is_logged_in。
+  * 冒烟测试扩到 68 项（二维码有效期解析 + CLI 扫码入口）。
+
+ -- pear <pear@localhost>  Fri, 16 Oct 2026 19:15:00 +0800
+
+gnome-poster (0.1.4) trixie; urgency=medium
+
+  * 修 X 登录的一个真实兼容性问题：回调地址写成 http://localhost:… 时，
+    浏览器会先把 localhost 解析到 ::1，而接收器只绑了 127.0.0.1，
+    回调永远到不了（用户只看到浏览器「无法连接」）。现在按主机名
+    依次尝试 ::1 / 127.0.0.1。
+  * 授权等待时间 3 分钟 → 10 分钟：第一次用的人要登录、可能还要现建应用，
+    3 分钟根本不够，超时后回调就会打到没人监听的端口上。
+  * 设置页在回调地址下面加了一条明确警告：「这个地址不是网页，别用浏览器打开」——
+    实测好几个人都会把它粘进浏览器去「看看是什么」，然后以为坏了。
+  * 步骤文案改成「复制这个地址填进 X 后台的 Callback URI」，
+    并注明 X 要求 exact match（大小写 / 端口 / 结尾都不能差）。
+  * 冒烟测试扩到 66 项，含「回调接收器真能收到 code」的端到端验证
+    （127.0.0.1 与 localhost 各一次）。
+
+ -- pear <pear@localhost>  Fri, 16 Oct 2026 11:45:00 +0800
+
+gnome-poster (0.1.3) trixie; urgency=medium
+
+  * 修一个会让小红书发布**必然失败**的真 bug：本地发布服务
+    （xiaohongshu-mcp）的 /api/v1/publish 收的是 JSON + 本地文件路径，
+    而这里发的是 multipart 文件流。对着服务源码（routes.go / service.go）
+    逐字核对后改正。
+  * 话题改为走服务自己的 tags 数组，不再手工往正文里塞 #话题[话题]#；
+    新增 compose_body(embed_tags=False)。
+  * 视频笔记改走 /api/v1/publish_video。
+  * 新增 app 内扫码登录：设置 → 小红书 → 「扫码登录」直接显示二维码，
+    扫完自动变「已登录」，不用另外跑登录工具。
+  * 图片路径含非 ASCII 字符时自动复制成纯 ASCII 临时名
+    （服务 FAQ 里点名的失败原因）。
+  * 冒烟测试扩到 64 项，含「请求体字段是否与服务约定一致」的回归测试。
+
+ -- pear <pear@localhost>  Fri, 16 Oct 2026 11:35:00 +0800
+
+gnome-poster (0.1.2) trixie; urgency=medium
+
+  * 设置 → 账号页按「1-2-3 步、全部展开、每步旁边有按钮」重排：
+    第一版把步骤藏进默认折叠的展开器里，用户看到一屏「MCP / 签名器 / Cookie」
+    完全不知道从哪下手。折腾人的项统一收进折叠的「高级设置」。
+  * 新增「复制文案」（标题栏按钮 + Ctrl+Shift+C）：不配任何账号也能用，
+    按所选平台格式拼好放进剪贴板，粘到手机 App 里发。
+  * 主窗口顶部横幅一并提示零配置出路。
+  * 修测试假阳性：--self-test / --exercise 在用户开着应用时会被 GApplication
+    当成第二个实例、什么都不做却报「通过」。现在带 NON_UNIQUE，且没产出快照
+    就算失败。
+  * --self-test=settings 改为验证对话框打开并 dump 其控件树
+    （Adw.Dialog 是独立 surface，进程内截不到）。
+  * 冒烟测试扩到 56 项，含设置页内容与「复制文案」的断言。
+
+ -- pear <pear@localhost>  Thu, 15 Oct 2026 22:40:00 +0800
+
+gnome-poster (0.1.1) trixie; urgency=medium
+
+  * 标题改为小红书专属：不再被拼进 X / Instagram 的正文。
+  * 小红书投票改为一等公民（App 端确有投票组件：2–6 项 + 独立问题），
+    按发布通道能力协商「原生组件 / 文字降级」，默认安全降级。
+  * 新增 Instagram 支持（官方 Content Publishing API：图片 / 轮播 / Reels）。
+  * 底部每个平台加 GNOME 风格用量圆环（Cairo 自绘，随主题着色）。
+  * 账号配置页重写：状态行 + 字段说明 + 可展开的分步指引 + 直达链接 + 复制按钮；
+    一个平台都没配时主窗口顶部出现引导横幅。
+  * 移除标题栏左侧的设置按钮（右侧「更多」菜单里已有，Ctrl+, 也在）。
+  * 修 CSS：--accent-color / --error-color / --warning-color 在本机
+    （GTK 4.18.6 + libadwaita 1.7.6）解析成越界值，会让超限字数变随机颜色，
+    改用 --*-bg-color 族。
+  * 修 selection-changed 信号处理函数少收一个参数 —— 用户手点平台复选框会
+    TypeError，而之前的测试从没点过它。
+  * 修 jieba.posseg 冷加载（~0.5s）发生在主线程，把窗口首帧都卡住。
+  * 修 Adw 行的 title/subtitle 未转义 markup，含 & 的文案整条渲染失败。
+  * 自检/演练模式不再恢复用户真实草稿（曾经把用户的图片拍进截图）。
+  * 冒烟测试扩到 47 项，含圆环描边的像素级颜色校验。
+
+ -- pear <pear@localhost>  Thu, 15 Oct 2026 22:20:00 +0800
+
+gnome-poster (0.1.0) trixie; urgency=medium
+
+  * 初始版本。
+  * 撰写界面：标题、正文、图片 / 视频（拖拽 + 缩略图 + ALT 文本）。
+  * 输入 @ 实时弹出关注列表，支持拼音全拼 / 首字母 / 昵称 / handle 模糊搜索。
+  * 智能话题标签：jieba 词性过滤 + 小红书话题接口，Gtk.FlowBox 的 chips。
+  * 投票编辑面板（X 原生投票；小红书降级为正文文字并弹确认）。
+  * 多平台并行异步发布，AdwToast 实时进度与结果提示。
+  * X 走官方 API v2 + OAuth2 PKCE；小红书支持本地发布服务与创作者平台双通道。
+
+ -- pear <pear@localhost>  Thu, 15 Oct 2026 20:50:00 +0800

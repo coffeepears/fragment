@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="gnome-poster">
+
+  <enum id="com.pear.GnomePoster.ColorScheme">
+    <value nick="default" value="0"/>
+    <value nick="light" value="1"/>
+    <value nick="dark" value="2"/>
+  </enum>
+
+  <enum id="com.pear.GnomePoster.XhsTransport">
+    <value nick="mcp" value="0"/>
+    <value nick="web" value="1"/>
+  </enum>
+
+  <schema id="com.pear.GnomePoster" path="/com/pear/GnomePoster/">
+
+    <!-- 外观 -->
+    <key name="color-scheme" enum="com.pear.GnomePoster.ColorScheme">
+      <default>'default'</default>
+      <summary>颜色方案</summary>
+      <description>default 跟随系统；light / dark 强制浅色 / 深色。</description>
+    </key>
+    <key name="window-width" type="i">
+      <default>780</default>
+      <summary>窗口宽度</summary>
+    </key>
+    <key name="window-height" type="i">
+      <default>900</default>
+      <summary>窗口高度</summary>
+    </key>
+
+    <!-- X (Twitter) -->
+    <key name="x-client-id" type="s">
+      <default>''</default>
+      <summary>X OAuth 2.0 Client ID</summary>
+      <description>在 developer.x.com 建一个 OAuth 2.0 Public Client（PKCE）后填入。</description>
+    </key>
+    <key name="x-redirect-uri" type="s">
+      <default>'http://127.0.0.1:8721/callback'</default>
+      <summary>X 回调地址</summary>
+      <description>必须与开发者后台登记的回调地址一致。</description>
+    </key>
+    <key name="x-premium" type="b">
+      <default>false</default>
+      <summary>当前账号是否支持长文</summary>
+      <description>开启后正文上限按 25000 加权字符计。</description>
+    </key>
+
+    <!-- 小红书 -->
+    <key name="xhs-transport" enum="com.pear.GnomePoster.XhsTransport">
+      <default>'mcp'</default>
+      <summary>小红书发布通道</summary>
+      <description>mcp 走本地 xiaohongshu-mcp 服务（推荐，签名由它处理）；web 直连创作者平台，需要自备签名器。</description>
+    </key>
+    <key name="xhs-mcp-endpoint" type="s">
+      <default>'http://127.0.0.1:18060'</default>
+      <summary>本地 MCP 服务地址</summary>
+    </key>
+    <key name="xhs-signer-cmd" type="s">
+      <default>''</default>
+      <summary>签名器命令</summary>
+      <description>web 通道使用。stdin 收 JSON，stdout 返回 {"x-s": ..., "x-t": ...}。</description>
+    </key>
+    <key name="xhs-native-poll" type="b">
+      <default>false</default>
+      <summary>尝试原生投票组件</summary>
+      <description>小红书投票是 App 端组件，没有公开写入接口。打开后会把投票字段发给发布通道，仅当你的通道支持时才有效；不支持会降级成正文文字。</description>
+    </key>
+
+    <key name="xhs-visibility" type="s">
+      <default>'公开可见'</default>
+      <summary>小红书笔记可见范围</summary>
+      <description>公开可见 / 仅自己可见 / 仅互关好友可见。想先自己看一眼效果时用「仅自己可见」。</description>
+    </key>
+
+    <key name="extra-platforms" type="b">
+      <default>true</default>
+      <summary>界面上同时显示 X 和 Instagram</summary>
+      <description>关掉之后界面只留小红书（代码保留，随时可以打开）。</description>
+    </key>
+
+    <!-- Instagram -->
+    <key name="instagram-user-id" type="s">
+      <default>''</default>
+      <summary>Instagram 用户 ID</summary>
+      <description>Content Publishing API 的 {ig-user-id}，在 Graph API Explorer 里查 me/accounts 得到。</description>
+    </key>
+    <key name="instagram-upload-cmd" type="s">
+      <default>''</default>
+      <summary>图床上传命令</summary>
+      <description>Instagram 只收公网 URL。此命令 stdin 收 JSON（含 path），stdout 返回 {"url": "https://..."}。</description>
+    </key>
+
+    <!-- 行为 -->
+    <key name="simulate" type="b">
+      <default>false</default>
+      <summary>演练模式</summary>
+      <description>不真正发请求，走完整流程并返回模拟结果，用于调试界面。</description>
+    </key>
+    <key name="platforms" type="as">
+      <default>['xhs', 'x']</default>
+      <summary>默认勾选的平台</summary>
+    </key>
+    <key name="auto-tags" type="b">
+      <default>true</default>
+      <summary>自动推荐话题</summary>
+    </key>
+    <key name="restore-draft" type="b">
+      <default>true</default>
+      <summary>退出时保存草稿并在下次启动恢复</summary>
+    </key>
+  </schema>
+</schemalist>

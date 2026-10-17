@@ -1,0 +1,18 @@
+#!/bin/sh
+# 安装后编译字节码（等价于 dh_python3 干的事）。
+#
+# -V 3.11- 表示「3.11 及以上」，和 pyproject.toml 里的 requires-python 对齐，
+# 免得给更老的解释器编译出用不了的 .pyc。
+#
+# gschema 编译、图标缓存、desktop 数据库这三件事**不用**在这里做：
+#   /usr/share/glib-2.0/schemas   ← libglib2.0-0t64 的 interest 触发器
+#   /usr/share/icons/hicolor      ← hicolor-icon-theme 的触发器
+#   /usr/share/applications       ← desktop-file-utils 的触发器
+# dpkg 会在解包后自动跑它们，自己再写一遍反而容易漏。
+set -e
+
+if command -v py3compile >/dev/null 2>&1; then
+    py3compile -p gnome-poster -V 3.11- || true
+fi
+
+exit 0

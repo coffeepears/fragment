@@ -1,0 +1,52 @@
+Source: gnome-poster
+Section: net
+Priority: optional
+Maintainer: pear <pear@localhost>
+Homepage: https://example.org/gnome-poster
+Standards-Version: 4.7.0
+Rules-Requires-Root: no
+# 故意不列 debhelper：debian/rules 是手写的，只用到 dpkg-dev + meson + ninja。
+# 想换成标准的 debhelper 流程见 debian/rules 顶部的说明。
+Build-Depends: dpkg-dev (>= 1.22),
+               meson (>= 0.62),
+               ninja-build,
+               python3,
+               libglib2.0-dev
+
+Package: gnome-poster
+Architecture: amd64
+# 不写 ${misc:Depends} / ${python3:Depends}：那两个变量由 dh_gencontrol /
+# dh_python3 生成，这里是手写规则，直接给确定的值。
+Depends: python3,
+         python3-gi,
+         gir1.2-gtk-4.0 (>= 4.10),
+         gir1.2-adw-1 (>= 1.5),
+         python3-httpx,
+         python3-pypinyin
+Recommends: python3-jieba,
+            gir1.2-secret-1,
+            gir1.2-gstreamer-1.0,
+            gir1.2-gst-plugins-base-1.0,
+            gstreamer1.0-plugins-base
+Suggests: gnome-keyring
+Description: Fragment —— 撰写并发布 Rednote 笔记的 GNOME 客户端
+ Fragment 是一个原生 GNOME 的 Rednote 笔记客户端。支持标题、正文、
+ 图片、话题与投票，扫码登录后直接发布。
+ .
+ 功能：
+  * 标题、正文、图片 / 视频拖拽上传与缩略图预览（图片可写替代文本）
+  * 输入 @ 实时弹出关注列表，支持拼音与昵称模糊搜索
+  * 话题推荐：本地分词（jieba 词性过滤）+ Rednote 话题接口
+  * 原生投票，按 Rednote 上限自动裁剪
+  * 随包安装的本机发布服务：扫码登录、自动启动、退出时一并收掉
+  * 用量圆环实时显示字数与媒体占用
+  * 跟随系统深色 / 浅色模式，也可在设置里强制切换
+ .
+ 平台接入：
+  * 小红书：本地发布服务（推荐）或创作者平台 Web 通道
+  * X：官方 API v2 + OAuth 2.0 PKCE
+  * Instagram：官方 Content Publishing API（需企业号 / 创作者号，
+    且媒体需公网 URL）
+ .
+ python3-jieba 与 GStreamer 组件在 Recommends 里：缺了也能跑，
+ 只是话题抽取退化成 n-gram、视频附件不给缩略图。
