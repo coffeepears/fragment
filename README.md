@@ -544,8 +544,8 @@ GPL-3.0-or-later。
 
 | | 贡献 |
 |---|---|
-| **pear** · [@coffeepears](https://github.com/coffeepears) | 项目发起；需求与设计取舍（单页撰写、圆环用量、Papirus 图标风格）；真机验证与逐轮反馈 |
-| **DeepSeek** <br><sub>`noreply@deepseek.com`</sub> | 以 [DeepSeek Harness](https://github.com/deepseek-ai) 智能体身份实现大部分代码与测试：GTK4 / Libadwaita 界面、Rednote 发布通道与媒体上传、小助手生命周期管理、deb 打包、冒烟测试 |
+| <img src="https://github.com/coffeepears.png?size=64" width="36" height="36" alt="pear"> &nbsp; **pear**<br><sub>[@coffeepears](https://github.com/coffeepears)</sub> | 项目发起；需求与设计取舍（单页撰写、圆环用量、Papirus 图标风格）；真机验证与逐轮反馈 |
+| <img src="https://avatars.githubusercontent.com/u/148330874?v=4" width="36" height="36" alt="DeepSeek"> &nbsp; **DeepSeek**<br><sub>`noreply@deepseek.com`</sub> | 以 [DeepSeek Harness](https://github.com/deepseek-ai) 智能体身份实现大部分代码与测试：GTK4 / Libadwaita 界面、Rednote 发布通道与媒体上传、小助手生命周期管理、deb 打包、冒烟测试 |
 
 > 界面设计稿由 pear 提供；实现、排错与打包由 DeepSeek 智能体完成，
 > 每个改动都经过 `./run.sh --exercise` 的进程内快照测试验证。
